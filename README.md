@@ -8,7 +8,7 @@
 - 框架: Flask
 - 环境依赖: poetry
 - 版本控制: git-github
-- 用途: ES 日志解析
+- 用途: BBS
 - 数据库: MySQL
 - Author: StudentCWZ
 - Email: StudentCWZ@outlook.com
