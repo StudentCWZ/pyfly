@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "application"
+version = "0.1.0"
+description = ""
+authors = ["StudentCWZ <330459539@qq.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+flask = "^2.3.2"
+flask-sqlalchemy = "^3.0.5"
+flask-bcrypt = "^1.0.1"
+flask-marshmallow = "^0.15.0"
+flask-jwt-extended = "^4.5.2"
+dynaconf = "^3.1.12"
+python-dotenv = "^1.0.0"
+pymysql = "^1.1.0"
+apispec = "^6.3.0"
+apispec-webframeworks = "^0.5.2"
+flask-restful = "^0.3.10"
+flask-migrate = "^4.0.4"
+marshmallow-sqlalchemy = "^0.29.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
