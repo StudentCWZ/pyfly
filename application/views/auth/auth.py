@@ -24,7 +24,6 @@ def login():
     if not username or not password:
         return jsonify({"msg": "Missing username or password"}), 400
     ret = {"msg": "ok"}
-    print(current_app.config.SQLALCHEMY_DATABASE_URI)
     return jsonify(ret), 200
 
 
