@@ -1,8 +1,8 @@
 [tool.poetry]
 name = "application"
 version = "0.1.0"
-description = ""
-authors = ["StudentCWZ <330459539@qq.com>"]
+description = "BBS"
+authors = ["StudentCWZ <StudentCWZ@outlook.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
