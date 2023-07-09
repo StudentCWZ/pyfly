@@ -177,4 +177,4 @@ venv.bak/
 .idea
 
 ### Migrations
-.migrations
+migrations
