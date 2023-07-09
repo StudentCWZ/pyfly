@@ -7,7 +7,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
-flask = "^2.3.2"
+flask = "2.2.5"
 flask-sqlalchemy = "^3.0.5"
 flask-bcrypt = "^1.0.1"
 flask-marshmallow = "^0.15.0"
