@@ -28,6 +28,6 @@ def login():
     return jsonify(ret), 200
 
 
-@auth_bp.before_app_request
+@auth_bp.before_app_first_request
 def register_views():
     apispec.spec.path(view=login, app=current_app)
