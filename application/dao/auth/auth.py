@@ -22,7 +22,7 @@ from flask_jwt_extended import (
 
 from application.models import User
 from application.dao.auth.helper import add_token_to_database, revoke_token
-from application.utils.error import AuthFailed
+from application.utils import AuthFailed, success_api
 
 
 class AuthDao:
@@ -49,7 +49,7 @@ class AuthDao:
         add_token_to_database(refresh_token, current_app.config["JWT_IDENTITY_CLAIM"])
 
         ret = {"access_token": access_token, "refresh_token": refresh_token}
-        return jsonify(ret), 200
+        return success_api(ret)
 
     @classmethod
     def refresh(cls):

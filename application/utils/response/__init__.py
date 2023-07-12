@@ -8,8 +8,7 @@
 # @Date:     2023-01-06 10:10:45
 # @Last Modified by: StudentCWZ
 # @Last Modified time: 2023-01-11 09:52:42
-# @Description: utils 模块
+# @Description: response utils
 """
 
-from .error import *
 from .response import success_api
