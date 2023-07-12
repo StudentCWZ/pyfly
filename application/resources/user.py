@@ -21,8 +21,7 @@ from application.schemas import UserSchema
 
 
 class UserResource(Resource):
-
-    # method_decorators = [jwt_required()]
+    method_decorators = [jwt_required()]
 
     def get(self, user_id):
         schema = UserSchema()
