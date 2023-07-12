@@ -12,19 +12,22 @@
 """
 
 from flask import jsonify, current_app
-from flask_jwt_extended import create_access_token, create_refresh_token
+from flask_jwt_extended import (
+    create_access_token,
+    create_refresh_token,
+    get_jwt_identity,
+    get_jwt,
+)
 
 from application.models import User
-from application.dao.auth.helper import (
-    add_token_to_database,
-)
+from application.dao.auth.helper import add_token_to_database, revoke_token
 
 
 class AuthDao:
     @classmethod
     def login(cls, username: str, password: str):
         """
-        Login Dao
+        Authenticate user and return tokens by dao layer
 
         :param      cls:       The cls
         :type       cls:       { type_description }
@@ -44,3 +47,43 @@ class AuthDao:
 
         ret = {"access_token": access_token, "refresh_token": refresh_token}
         return jsonify(ret), 200
+
+    @classmethod
+    def refresh(cls):
+        """
+        Get an access token from a refresh token by dao layer
+
+        :param      cls:  The cls
+        :type       cls:  { type_description }
+        """
+        current_user = get_jwt_identity()
+        access_token = create_access_token(identity=current_user)
+        ret = {"access_token": access_token}
+        add_token_to_database(access_token, current_app.config["JWT_IDENTITY_CLAIM"])
+        return jsonify(ret), 200
+
+    @classmethod
+    def revoke_access_token(cls):
+        """
+        Revoke an access token by dao layer
+
+        :param      cls:  The cls
+        :type       cls:  { type_description }
+        """
+        jti = get_jwt()["jti"]
+        user_identity = get_jwt_identity()
+        revoke_token(jti, user_identity)
+        return jsonify({"message": "token revoked"}), 200
+
+    @classmethod
+    def revoke_refresh_token(cls):
+        """
+        Revoke a refresh token by dao layer
+
+        :param      cls:  The cls
+        :type       cls:  { type_description }
+        """
+        jti = get_jwt()["jti"]
+        user_identity = get_jwt_identity()
+        revoke_token(jti, user_identity)
+        return jsonify({"message": "token revoked"}), 200

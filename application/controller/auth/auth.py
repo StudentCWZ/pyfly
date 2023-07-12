@@ -20,7 +20,7 @@ class AuthController:
     @classmethod
     def login(cls, dic: dict):
         """
-        Login controller
+        Authenticate user and return tokens by controller layer
 
         :param      cls:  The cls
         :type       cls:  { type_description }
@@ -32,3 +32,33 @@ class AuthController:
         if not username or not password:
             return jsonify({"msg": "Missing username or password"}), 400
         return AuthDao.login(username, password)
+
+    @classmethod
+    def refresh(cls):
+        """
+        Revoke an access token by controller layer
+
+        :param      cls:  The cls
+        :type       cls:  { type_description }
+        """
+        return AuthDao.refresh()
+
+    @classmethod
+    def revoke_access_token(cls):
+        """
+        Revoke an access token by controller layer
+
+        :param      cls:  The cls
+        :type       cls:  { type_description }
+        """
+        return AuthDao.revoke_access_token()
+
+    @classmethod
+    def revoke_refresh_token(cls):
+        """
+        Revoke a refresh token by controller layer
+
+        :param      cls:  The cls
+        :type       cls:  { type_description }
+        """
+        return AuthDao.revoke_refresh_token()
