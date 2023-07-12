@@ -32,7 +32,7 @@ class User(db.Model):
 
     @password.setter
     def password(self, password: str):
-        self._password = flask_bcrypt.generate_password_hash(password).decode('utf-8')
+        self._password = flask_bcrypt.generate_password_hash(password).decode("utf-8")
 
     def check_password(self, password: str):
         """return boolean"""

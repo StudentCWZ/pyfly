@@ -1,14 +1,21 @@
-from flask import request, jsonify, Blueprint, current_app
-from flask_jwt_extended import (
-    create_access_token,
-    create_refresh_token,
-    jwt_required,
-    get_jwt_identity,
-    get_jwt,
-)
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+# @Version:  Python 3.11.4
+# @Software: Sublime Text 4
+# @Author:   StudentCWZ
+# @Email:    StudentCWZ@outlook.com
+# @Date:     2023-01-06 10:32:46
+# @Last Modified by: StudentCWZ
+# @Last Modified time: 2023-01-06 10:33:20
+# @Description: auth views
+"""
 
-from application.models import User
+
+from flask import request, jsonify, Blueprint, current_app
+
 from application.extensions.init_apispec import apispec
+from application.controller import AuthController
 
 
 auth_bp = Blueprint("auth", __name__, url_prefix="/auth")
@@ -18,13 +25,7 @@ auth_bp = Blueprint("auth", __name__, url_prefix="/auth")
 def login():
     if not request.is_json:
         return jsonify({"msg": "Missing JSON in request"}), 400
-
-    username = request.json.get("username", None)
-    password = request.json.get("password", None)
-    if not username or not password:
-        return jsonify({"msg": "Missing username or password"}), 400
-    ret = {"msg": "ok"}
-    return jsonify(ret), 200
+    return AuthController.login(dic=request.json)
 
 
 @auth_bp.before_app_first_request

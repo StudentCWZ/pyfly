@@ -2,5 +2,6 @@ default:
     SQLALCHEMY_DATABASE_URI: sqlite://data.db
 development:
     SQLALCHEMY_DATABASE_URI: mysql+pymysql://root:localhost123@localhost:3306/pyfly
+    JWT_SECRET_KEY: changeme
 production:
     SQLALCHEMY_DATABASE_URI: postgresql://...
