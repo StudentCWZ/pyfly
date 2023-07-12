@@ -20,10 +20,12 @@ from application.extensions.init_dynaconf import init_dynaconf
 from application.extensions.init_jwt import jwt
 from application.extensions.init_migrate import init_migrate
 from application.extensions.init_sqlalchemy import init_database
+from application.extensions.init_logger import init_logger
 
 
 def init_plugs(app: Flask) -> None:
     init_dynaconf(app)
+    init_logger(app)
     flask_bcrypt.init_app(app)
     jwt.init_app(app)
     init_database(app)
