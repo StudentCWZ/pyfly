@@ -20,6 +20,7 @@ apispec-webframeworks = "^0.5.2"
 flask-restful = "^0.3.10"
 flask-migrate = "^4.0.4"
 marshmallow-sqlalchemy = "^0.29.0"
+flask-loguru = "^1.0.0"
 
 
 [build-system]

@@ -11,9 +11,10 @@
 # @Description: auth controller
 """
 
-from flask import jsonify
+from flask_loguru import logger
 
 from application.dao import AuthDao
+from application.utils.error import ParameterException
 
 
 class AuthController:
@@ -30,7 +31,8 @@ class AuthController:
         username = dic.get("username", None)
         password = dic.get("password", None)
         if not username or not password:
-            return jsonify({"msg": "Missing username or password"}), 400
+            logger.error("Missing username or password")
+            raise ParameterException()
         return AuthDao.login(username, password)
 
     @classmethod

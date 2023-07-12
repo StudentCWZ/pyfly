@@ -12,11 +12,13 @@
 """
 
 
-from flask import request, jsonify, Blueprint, current_app
+from flask import request, Blueprint, current_app
+from flask_loguru import logger
 from flask_jwt_extended import jwt_required
 
 from application.extensions.init_apispec import apispec
 from application.controller import AuthController
+from application.utils.error import ClientTypeError
 
 
 auth_bp = Blueprint("auth", __name__, url_prefix="/auth")
@@ -26,7 +28,8 @@ auth_bp = Blueprint("auth", __name__, url_prefix="/auth")
 def login():
     """Authenticate user and return tokensr"""
     if not request.is_json:
-        return jsonify({"msg": "Missing JSON in request"}), 400
+        logger.error("Missing JSON in request")
+        raise ClientTypeError()
     return AuthController.login(dic=request.json)
 
 

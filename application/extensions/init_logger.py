@@ -14,7 +14,7 @@
 
 from flask import Flask
 
-from src.app.libs import Logger
+from application.libs import Logger
 
 log = Logger()
 

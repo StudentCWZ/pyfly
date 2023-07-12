@@ -12,6 +12,7 @@
 """
 
 from flask import jsonify, current_app
+from flask_loguru import logger
 from flask_jwt_extended import (
     create_access_token,
     create_refresh_token,
@@ -21,6 +22,7 @@ from flask_jwt_extended import (
 
 from application.models import User
 from application.dao.auth.helper import add_token_to_database, revoke_token
+from application.utils.error import AuthFailed
 
 
 class AuthDao:
@@ -38,7 +40,8 @@ class AuthDao:
         """
         user = User.query.filter_by(username=username).first()
         if user is None or not user.check_password(password):
-            return jsonify({"msg": "Bad credentials"}), 400
+            logger.error("Bad credentials")
+            raise AuthFailed()
 
         access_token = create_access_token(identity=user.id)
         refresh_token = create_refresh_token(identity=user.id)

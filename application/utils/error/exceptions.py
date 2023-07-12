@@ -13,7 +13,7 @@
 
 # pylint: skip-file
 
-from application.utils.error.helper import APIException
+from application.utils.error.handler import APIException
 
 
 class Success(APIException):
