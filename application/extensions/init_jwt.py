@@ -7,14 +7,14 @@
 # @Email:    StudentCWZ@outlook.com
 # @Date:     2023-01-06 10:32:46
 # @Last Modified by: StudentCWZ
-# @Last Modified time: 2023-01-06 10:33:20
+# @Last Modified time: 2023-07-14 22:01:56
 # @Description: flask_jwt_extended extension
 """
 
 from flask_jwt_extended import JWTManager
 
-from application.models import User
 from application.dao.auth.helper import is_token_revoked
+from application.models import User
 
 jwt = JWTManager()
 

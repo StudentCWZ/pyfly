@@ -7,7 +7,7 @@
 # @Email:    StudentCWZ@outlook.com
 # @Date:     2023-03-09 08:57:20
 # @Last Modified by: StudentCWZ
-# @Last Modified time: 2023-03-09 08:58:26
+# @Last Modified time: 2023-07-14 21:57:56
 # @Description: extensions
 """
 
@@ -18,9 +18,9 @@ from application.extensions.init_bcrypt import flask_bcrypt
 from application.extensions.init_cli import init_cli
 from application.extensions.init_dynaconf import init_dynaconf
 from application.extensions.init_jwt import jwt
+from application.extensions.init_logger import init_logger
 from application.extensions.init_migrate import init_migrate
 from application.extensions.init_sqlalchemy import init_database
-from application.extensions.init_logger import init_logger
 
 
 def init_plugs(app: Flask) -> None:

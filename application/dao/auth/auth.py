@@ -7,21 +7,21 @@
 # @Email:    StudentCWZ@outlook.com
 # @Date:     2023-01-06 10:32:46
 # @Last Modified by: StudentCWZ
-# @Last Modified time: 2023-01-06 10:33:20
+# @Last Modified time: 2023-07-14 22:02:17
 # @Description: auth dao
 """
 
-from flask import jsonify, current_app
-from flask_loguru import logger
+from flask import current_app, jsonify
 from flask_jwt_extended import (
     create_access_token,
     create_refresh_token,
     get_jwt_identity,
     get_jwt,
 )
+from flask_loguru import logger
 
-from application.models import User
 from application.dao.auth.helper import add_token_to_database, revoke_token
+from application.models import User
 from application.utils import AuthFailed, success_api
 
 

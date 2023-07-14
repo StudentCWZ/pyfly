@@ -7,19 +7,18 @@
 # @Email:    StudentCWZ@outlook.com
 # @Date:     2023-01-06 10:32:46
 # @Last Modified by: StudentCWZ
-# @Last Modified time: 2023-01-06 10:33:20
+# @Last Modified time: 2023-07-14 22:01:02
 # @Description: auth views
 """
 
 
-from flask import request, Blueprint, current_app
-from flask_loguru import logger
+from flask import Blueprint, current_app, request
 from flask_jwt_extended import jwt_required
+from flask_loguru import logger
 
-from application.extensions.init_apispec import apispec
 from application.controller import AuthController
+from application.extensions.init_apispec import apispec
 from application.utils.error import ClientTypeError
-
 
 auth_bp = Blueprint("auth", __name__, url_prefix="/auth")
 
