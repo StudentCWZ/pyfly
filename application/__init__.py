@@ -32,7 +32,7 @@ def create_app(config_name=None):
 
     if not config_name:
         # 尝试从本地环境中读取
-        config_name = os.getenv('Flask_ENV', 'development')
+        config_name = os.getenv('FLASK_ENV', 'development')
 
     # 设置 dynaconf 相关环境变量
     os.environ['ENV_FOR_DYNACONF'] = config_name
