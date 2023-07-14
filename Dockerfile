@@ -19,7 +19,7 @@ ENV POETRY_HOME=/opt/poetry \
     POETRY_CACHE_DIR=/opt/.cache
 
 # Flask deps:
-ENV FLASK_ENV=production
+ENV FLASK_DEBUG=0
 
 # Install poetry separated from system interpreter
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \
