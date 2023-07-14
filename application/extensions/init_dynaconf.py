@@ -17,6 +17,7 @@ from typing import List
 
 from dynaconf import FlaskDynaconf
 from flask import Flask
+from application.utils.loader import consul_loader
 
 
 def init_dynaconf(app: Flask) -> None:
@@ -33,11 +34,14 @@ def init_dynaconf(app: Flask) -> None:
     ]
     FlaskDynaconf(
         app=app,
-        envvar_prefix='EXAMPLE_ETL',
-        settings_files=_settings_files,  # load user configuration.
-        environments=True,  # Enable multi-level configuration，eg: default, development, production
-        load_dotenv=True,  # Enable load .env
-        lowercase_read=False,  # If true, can't use `settings.foo`, but can only use `settings.FOO`
-        includes=_external_files,  # Customs settings.
-        base_dir=_base_dir,  # `settings.BASE_DIR`
+        core_loaders=[],
+        settings_files=[],
+        # envvar_prefix='EXAMPLE_ETL',
+        # settings_files=_settings_files,  # load user configuration.
+        # environments=True,  # Enable multi-level configuration，eg: default, development, production
+        # load_dotenv=True,  # Enable load .env
+        loaders=["application.utils.loader.consul_loader", "dynaconf.loaders.env_loader"],
+        # lowercase_read=False,  # If true, can't use `settings.foo`, but can only use `settings.FOO`
+        # includes=_external_files,  # Customs settings.
+        # base_dir=_base_dir,  # `settings.BASE_DIR`
     )
