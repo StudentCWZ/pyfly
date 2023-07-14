@@ -18,7 +18,6 @@ from typing import NamedTuple, Union
 
 import yaml
 from dynaconf.base import LazySettings
-from dynaconf.utils import build_env_list
 from dynaconf.utils.parse_conf import parse_conf_data
 
 try:

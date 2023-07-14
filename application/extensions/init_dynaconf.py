@@ -11,13 +11,8 @@
 # @Description: flask-dynaconf extension
 """
 
-import sys
-from pathlib import Path
-from typing import List
-
 from dynaconf import FlaskDynaconf
 from flask import Flask
-from application.utils.loader import consul_loader
 
 
 def init_dynaconf(app: Flask) -> None:
@@ -27,11 +22,6 @@ def init_dynaconf(app: Flask) -> None:
     :param app: flask.Flask application instance
     :return: None
     """
-    _base_dir: Path = Path(__file__).parent.parent.parent
-    _settings_files: Path = Path(__file__).parent.parent / 'config/settings.yaml'
-    _external_files: List[Path] = [
-        Path(sys.prefix, 'etc', 'example_etl', 'settings.yml')
-    ]
     FlaskDynaconf(
         app=app,
         core_loaders=[],
@@ -40,7 +30,10 @@ def init_dynaconf(app: Flask) -> None:
         # settings_files=_settings_files,  # load user configuration.
         # environments=True,  # Enable multi-level configuration，eg: default, development, production
         # load_dotenv=True,  # Enable load .env
-        loaders=["application.utils.loader.consul_loader", "dynaconf.loaders.env_loader"],
+        loaders=[
+            "application.utils.loader.consul_loader",
+            "dynaconf.loaders.env_loader",
+        ],
         # lowercase_read=False,  # If true, can't use `settings.foo`, but can only use `settings.FOO`
         # includes=_external_files,  # Customs settings.
         # base_dir=_base_dir,  # `settings.BASE_DIR`
