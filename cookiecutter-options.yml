@@ -1,0 +1,9 @@
+default_context:
+    project_name: "pyfly"
+    app_name: "application"
+    python_version: "3.8"
+    admin_user_username: "StudentCWZ"
+    admin_user_email: "StudentCWZ@outlook.com"
+    admin_user_password: "qwe!2345"
+    use_celery: "yes"
+    wsgi_server: "gunicorn"

@@ -11,4 +11,4 @@
 # @Description: resources layer
 """
 
-from .user import UserResource, UserList
+from .user import UserList, UserResource
