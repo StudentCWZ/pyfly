@@ -12,7 +12,7 @@
 """
 
 
-def success_api(msg: str = "ok", data: dict = None):
+def success_api(msg: str = "ok", data: dict | None = None) -> dict:
     if data is None:
         data = {}
     resp = {"code": 200, "msg": msg, "error_code": 0, "data": data}
