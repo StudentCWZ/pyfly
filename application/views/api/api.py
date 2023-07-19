@@ -16,7 +16,7 @@ from flask_restful import Api
 from marshmallow import ValidationError
 
 from application.extensions.init_apispec import apispec
-from application.resources import UserResource
+from application.resources import UserResource, UserList
 from application.schemas import UserSchema
 
 api_bp = Blueprint("api", __name__, url_prefix="/api/v1")
@@ -24,6 +24,7 @@ api = Api(api_bp)
 
 
 api.add_resource(UserResource, "/users/<int:user_id>", endpoint="user_by_id")
+api.add_resource(UserList, "/users", endpoint="users")
 
 
 @api_bp.before_app_first_request

@@ -15,6 +15,7 @@ from flask import request
 from flask_jwt_extended import jwt_required
 from flask_restful import Resource
 
+from application.commons.pagination import paginate
 from application.extensions.init_sqlalchemy import db
 from application.models import User
 from application.schemas import UserSchema
@@ -47,3 +48,23 @@ class UserResource(Resource):
         db.session.delete(user)
         db.session.commit()
         return success_api(msg="user deleted")
+
+
+class UserList(Resource):
+    method_decorators = [jwt_required()]
+
+    def get(self):
+        schema = UserSchema(many=True)
+        query = User.query
+        data = paginate(query, schema)
+        return success_api(data=data)
+
+    def post(self):
+        schema = UserSchema()
+        user = schema.load(request.json)
+
+        db.session.add(user)
+        db.session.commit()
+
+        data = {"user": schema.dump(user)}
+        return success_api(msg="user created", data=data)
