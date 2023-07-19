@@ -18,28 +18,32 @@ from flask_restful import Resource
 from application.extensions.init_sqlalchemy import db
 from application.models import User
 from application.schemas import UserSchema
+from application.utils.response import success_api
 
 
 class UserResource(Resource):
     method_decorators = [jwt_required()]
 
-    def get(self, user_id):
+    @staticmethod
+    def get(user_id: int):
         schema = UserSchema()
         user = User.query.get_or_404(user_id)
-        return {"user": schema.dump(user)}
+        data = {"user": schema.dump(user)}
+        return success_api(data=data)
 
-    def put(self, user_id):
+    @staticmethod
+    def put(user_id: int):
         schema = UserSchema(partial=True)
         user = User.query.get_or_404(user_id)
         user = schema.load(request.json, instance=user)
 
         db.session.commit()
+        data = {"user": schema.dump(user)}
+        return success_api(msg="user updated", data=data)
 
-        return {"msg": "user updated", "user": schema.dump(user)}
-
-    def delete(self, user_id):
+    @staticmethod
+    def delete(user_id: int):
         user = User.query.get_or_404(user_id)
         db.session.delete(user)
         db.session.commit()
-
-        return {"msg": "user deleted"}
+        return success_api(msg="user deleted")

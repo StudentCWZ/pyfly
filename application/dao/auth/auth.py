@@ -11,7 +11,7 @@
 # @Description: auth dao
 """
 
-from flask import current_app, jsonify
+from flask import current_app
 from flask_jwt_extended import (
     create_access_token,
     create_refresh_token,
@@ -48,8 +48,8 @@ class AuthDao:
         add_token_to_database(access_token, current_app.config["JWT_IDENTITY_CLAIM"])
         add_token_to_database(refresh_token, current_app.config["JWT_IDENTITY_CLAIM"])
 
-        ret = {"access_token": access_token, "refresh_token": refresh_token}
-        return success_api(ret)
+        data = {"access_token": access_token, "refresh_token": refresh_token}
+        return success_api(data=data)
 
     @classmethod
     def refresh(cls):
@@ -61,9 +61,9 @@ class AuthDao:
         """
         current_user = get_jwt_identity()
         access_token = create_access_token(identity=current_user)
-        ret = {"access_token": access_token}
+        data = {"access_token": access_token}
         add_token_to_database(access_token, current_app.config["JWT_IDENTITY_CLAIM"])
-        return jsonify(ret), 200
+        return success_api(data=data)
 
     @classmethod
     def revoke_access_token(cls):
@@ -76,7 +76,7 @@ class AuthDao:
         jti = get_jwt()["jti"]
         user_identity = get_jwt_identity()
         revoke_token(jti, user_identity)
-        return jsonify({"message": "token revoked"}), 200
+        return success_api(msg="token revoked")
 
     @classmethod
     def revoke_refresh_token(cls):
@@ -89,4 +89,4 @@ class AuthDao:
         jti = get_jwt()["jti"]
         user_identity = get_jwt_identity()
         revoke_token(jti, user_identity)
-        return jsonify({"message": "token revoked"}), 200
+        return success_api(msg="token revoked")

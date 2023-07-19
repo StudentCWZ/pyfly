@@ -11,9 +11,9 @@
 # @Description: 自定义响应返回
 """
 
-from flask import jsonify
 
-
-def success_api(data: dict):
-    resp = {"code": 200, "msg": "ok", "error_code": 0, "data": data}
-    return jsonify(resp), 200
+def success_api(msg: str = "ok", data: dict = None):
+    if data is None:
+        data = {}
+    resp = {"code": 200, "msg": msg, "error_code": 0, "data": data}
+    return resp
