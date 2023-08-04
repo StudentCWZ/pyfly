@@ -11,6 +11,8 @@
 # @Description: create_app
 """
 
+__version__ = "0.1.0"
+
 import os
 
 from flask import Flask
